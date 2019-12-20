@@ -110,7 +110,7 @@ FromDayToTR = function(day)
 {
     var tr = document.createElement("tr");
     var k = day.maxTemp;
-    var c = k-272.15;
+    var c = k-273.15;
     var f = c*(9/5)+32;
     values = [day.date.toString(), FormatFloat(day.humidity), 
 		FormatFloat(k),FormatFloat(c),FormatFloat(f)]
