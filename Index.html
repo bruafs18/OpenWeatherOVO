@@ -1,0 +1,42 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <h1 id="name"></h1>
+        <table id="tbl" border=1> 
+		<tr>
+			<th>Date</th>
+			<th>Humidity (avg)</th>
+			<th>Max Temp (K)</th>
+			<th>Max Temp (C)</th>
+			<th>Max Temp (F)</th>
+		</tr>
+	</table>
+    </body>
+    <script src="GetTheWeather.js"></script>
+    <script>
+        url= "https://samples.openweathermap.org/data/2.5/forecast?id=524901&appid=b6907d289e10d714a6e88b30761fae22";
+        GetData(url,function(data){
+            //Get the data in JSON and parse it to an object
+            var jsonData = JSON.parse(data);
+
+            //Show the city name
+            document.getElementById("name").innerText = jsonData.city.name;
+
+            //Get the table
+            var table = document.getElementById("tbl");
+            
+            //Get the list of the days with the average humidity and max temperatue
+            var listDays = GetDays(jsonData.list);
+            
+            //Start filling the table with the information
+            for(var idx=0;idx<listDays.length;idx++)
+            {
+                var tr = FromDayToTR(listDays[idx]);
+                table.appendChild(tr);
+            }
+
+        });
+    </script>
+</html>
